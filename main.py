@@ -1,26 +1,19 @@
 import serial
-from find_arduino import find_arduino
+from util import *
 from tkinter import *
 
-porta = find_arduino()  # Criar area para selecionar porta no tkinter, OptionMenu
+portas = find_arduino()  # Criar area para selecionar porta no tkinter, OptionMenu
 
 root = Tk()
 root.geometry("200x200")
 
 selected_port = StringVar()
-selected_port.set(porta[0] if porta else "")  # Set the default option
+selected_port.set("Selecione a porta")
 
-dropdown = OptionMenu(root, selected_port, *porta)
+dropdown = OptionMenu(root, selected_port, "Selecione a porta", *portas, command=arduino_conected)
 dropdown.pack()
 
 root.mainloop()
 
-
-try:
-    arduino = serial.Serial(porta, 115200, timeout=1)
-    print("Arduino está conectado.")
-except serial.SerialException:
-    print("Não foi possível conectar ao Arduino. Verifique a conexão e tente novamente.")
-finally:
-    if arduino.isOpen():
-        arduino.close()
+# arduino.write(b'1')  # esse b é de binario, equivalente high
+# se o usuario fechar a janela -> arduino.close()
