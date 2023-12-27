@@ -1,5 +1,5 @@
 import serial
-from util import *
+from utilities import *
 from tkinter import *
 
 portas = find_arduino()  # Criar area para selecionar porta no tkinter, OptionMenu
@@ -11,7 +11,10 @@ selected_port = StringVar()
 selected_port.set("Selecione a porta")
 
 dropdown = OptionMenu(root, selected_port, "Selecione a porta", *portas, command=arduino_conected)
+# dropdown = OptionMenu(root, selected_port, "Selecione a porta", *portas, command=lambda: arduino_conected(selected_port.get()))
 dropdown.pack()
+
+root.bind("<Destroy>", on_closing())
 
 root.mainloop()
 
