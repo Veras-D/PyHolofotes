@@ -2,16 +2,19 @@ from serial import *
 import serial.tools.list_ports
 from tkinter import *
 
+arduino = None
+
 
 def find_arduino():
     arduino_ports = serial.tools.list_ports.comports()
-    ports = []
+    ports = ["Selecione a porta"]
     for port in arduino_ports:
         ports.append(port.device)
     return ports
 
 
 def arduino_conected(portas):
+    global arduino
     try:
         arduino = serial.Serial(portas, 115200, timeout=1)
         print("Arduino está conectado.")
@@ -21,13 +24,7 @@ def arduino_conected(portas):
 
 
 def on_closing():
-    if 'arduino' in globals():  # Verificar se essa condição pode acontecer
-        Serial.close()  # verificar se esta funcionando, aparentemente não esta
+    global arduino
+    if arduino is not None:
+        arduino.close()
         print('fechado')
-
-# arduino_port = find_arduino()
-# print(arduino_port)
-# if arduino_port is not None:
-#     print(f"Arduino encontrado na porta {arduino_port}")
-# else:
-#     print("Arduino não encontrado")
