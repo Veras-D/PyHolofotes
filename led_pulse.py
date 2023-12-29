@@ -1,9 +1,11 @@
 from pyfirmata import Arduino
 import utilities
+import serial
 import time
 
 
-def led(uno, opc, tempo1, tempo2, num_pulse):
+def led(porta: str, opc: int, tempo1: float, tempo2: float = None, num_pulse: int = None):
+    uno = Arduino(porta)
     match opc:
         case 1:
             print('Pulso Unico')

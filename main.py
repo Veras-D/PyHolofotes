@@ -2,6 +2,7 @@ import serial
 from utilities import *
 from tkinter import *
 import customtkinter as ctk
+from led_pulse import led
 
 portas = find_arduino()
 
@@ -62,14 +63,11 @@ def open_new_page():
         port_error.mainloop()
 
 
-
-button = ctk.CTkButton(root, text="Continuar", command=open_new_page)  # Usuario só pode continuar se selecionar uma porta
+button = ctk.CTkButton(root, text="Continuar", command=open_new_page)
 button.pack(pady=25)
 
 porta = selected_port.get()
 root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
-root.mainloop()
 
-# arduino.write(b'1')  # esse b é de binario, equivalente high
-# se o usuario fechar a janela -> arduino.close()
+root.mainloop()
