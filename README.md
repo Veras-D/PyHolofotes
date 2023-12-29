@@ -6,7 +6,7 @@ PyHolofotes é um programa Python para controlar um sistema Arduino RELE, injeta
 
 Para baixar o executável, clique no botão "Download" abaixo. Depois de baixar, execute o arquivo.
 
-[Download Executable](https://github.com/Veras-D/PyHolofotes/raw/main/scripts/PyHolofotes.exe)
+[Download](https://github.com/Veras-D/PyHolofotes/raw/main/scripts/PyHolofotes.exe)
 
 ## Requisitos
 
