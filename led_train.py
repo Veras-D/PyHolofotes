@@ -1,6 +1,8 @@
 from pyfirmata import Arduino, util
 import time
 
+# Transformar isso em uma função, def led(uno, opc, tempo1, tempo2, num_pulse):
+
 uno = Arduino("/dev/ttyUSB0")
 
 while True:

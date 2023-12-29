@@ -34,12 +34,20 @@ def open_new_page():
         for widget in root.winfo_children():
             widget.pack_forget()
 
-        root.geometry("492x442")
+        root.geometry("500x500")
+        root.minsize(500, 200)
         root.resizable(True, True)
-        main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}")
+        main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
+                                  wraplength=500)
         main_label.pack()
         root.eval('tk::PlaceWindow . right')
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
+
+        pulso_unico_bnt = ctk.CTkButton(root, text="PULSO ÚNICO")
+        pulso_periodico_bnt = ctk.CTkButton(root, text="PULSO PERIÓDICO")
+        pulso_unico_bnt.pack(pady=20)
+        pulso_periodico_bnt.pack()
+
     else:
         port_error = ctk.CTkToplevel(root)
         port_error.title("Erro!")
