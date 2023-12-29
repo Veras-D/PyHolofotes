@@ -1,8 +1,8 @@
 import serial
-from utilities import *
+from scripts.utilities import *
 from tkinter import *
 import customtkinter as ctk
-from led_pulse import led
+from scripts.led_pulse import led
 
 
 def Arduino(porta):
