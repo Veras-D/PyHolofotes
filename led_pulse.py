@@ -2,6 +2,7 @@ from pyfirmata import Arduino
 import utilities
 import serial
 import time
+import customtkinter as ctk
 
 
 def led(porta: str, opc: int, tempo1: float, tempo2: float = None, num_pulse: int = None):
@@ -9,7 +10,6 @@ def led(porta: str, opc: int, tempo1: float, tempo2: float = None, num_pulse: in
     match opc:
         case 1:
             print('Pulso Unico')
-            tempo1 = float(input("Escolha o tempo de pulso (Em segundos): "))
             uno.digital[2].write(1)
             time.sleep(tempo1)
             print('Ligado')

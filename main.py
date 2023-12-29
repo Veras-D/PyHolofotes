@@ -20,7 +20,7 @@ def open_new_page():
 
         root.geometry("500x500")
         root.title("Seleção de pulso")
-        root.minsize(500, 200)
+        root.minsize(500, 250)
         root.resizable(True, True)
         main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
                                   wraplength=500)
@@ -28,8 +28,10 @@ def open_new_page():
         root.eval('tk::PlaceWindow . right')
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
-        pulso_unico_bnt = ctk.CTkButton(root, text="PULSO ÚNICO", command=pulso_unico)
-        pulso_periodico_bnt = ctk.CTkButton(root, text="PULSO PERIÓDICO", command=pulso_periodico)
+        pulso_unico_bnt = ctk.CTkButton(root, text="PULSO ÚNICO", command=pulso_unico,
+                                        fg_color="purple", hover_color="#8B008B")
+        pulso_periodico_bnt = ctk.CTkButton(root, text="PULSO PERIÓDICO", command=pulso_periodico,
+                                            fg_color="purple", hover_color="#8B008B")
         pulso_unico_bnt.pack(pady=20)
         pulso_periodico_bnt.pack()
 
@@ -54,13 +56,33 @@ def pulso_unico():
     root.title("Pulso Único")
     pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500)
     pulse_label.pack(pady=10)
-    # Colocar Formulario
-    led_pulse = led(selected_port.get(), 1, tempo1)
-    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
+    tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
+    tempo1_entry.pack()
+
+    def led_pulse():
+        if tempo1_entry.get().strip() != "":
+            led(porta=selected_port.get(), opc=1, tempo1=float(tempo1_entry.get()))
+            open_new_page()
+        else:
+            port_error = ctk.CTkToplevel(root)
+            port_error.title("Erro!")
+            port_error.geometry("200x100")
+            port_error.resizable(False, False)
+            error_label = ctk.CTkLabel(port_error, text="Você deve escolher um tempo para iniciar o programa!",
+                                       wraplength=200)
+            error_label.pack()
+
+            error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
+                                         fg_color="red", hover_color="#8B008B")
+            error_button.pack(pady=10)
+            port_error.mainloop()
+
+    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=lambda port=None: led_pulse(),
+                              fg_color="purple", hover_color="#8B008B")
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    goHome = ctk.CTkButton(root, text="Go To Home", command=open_new_page)
-    goHome.pack(pady=25)
+    goHome = ctk.CTkButton(root, text="Go Home", command=open_new_page, fg_color="purple", hover_color="#8B008B")
+    goHome.pack(pady=10)
 
 
 def pulso_periodico():
@@ -71,11 +93,11 @@ def pulso_periodico():
     pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500)
     pulse_label.pack(pady=10)
     # Colocar Formulario
-    led_pulse = led(selected_port.get(), 2, tempo1, tempo2, num_pulse)
-    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
+    led_pulse = lambda port=None: led(selected_port.get(), 2, tempo1, tempo2, num_pulse)
+    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse, fg_color="purple", hover_color="#8B008B")
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    goHome = ctk.CTkButton(root, text="Go To Home", command=open_new_page)
+    goHome = ctk.CTkButton(root, text="Go Home", command=open_new_page, fg_color="purple", hover_color="#8B008B")
     goHome.pack(pady=25)
 
 
@@ -86,16 +108,18 @@ root.geometry("300x120")
 root.resizable(False, False)
 ctk.set_appearance_mode("dark")
 
+
 selected_port = StringVar()
 selected_port.set("Selecione a porta")
 
 dropdown = ctk.CTkOptionMenu(root, variable=selected_port, values=portas,
-                             command=lambda port=None: arduino_conected(selected_port.get()))
+                             command=lambda port=None: arduino_conected(selected_port.get()),
+                             fg_color="purple", button_color="#8B008B", button_hover_color="#9370DB")
 dropdown.set(portas[0])
 dropdown.pack(pady=5)
 
 
-button = ctk.CTkButton(root, text="Continuar", command=open_new_page)
+button = ctk.CTkButton(root, text="Continuar", command=open_new_page, fg_color="purple", hover_color="#8B008B")
 button.pack(pady=25)
 
 porta = selected_port.get()
@@ -104,4 +128,5 @@ root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get
 
 root.mainloop()
 
+# Colocar link do instagram e do github no canto inferior da home
 # Procurar logo para icone

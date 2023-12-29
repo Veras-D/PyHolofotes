@@ -21,6 +21,7 @@ while True:
             time.sleep(tempo1)
             print('Ligado')
             uno.digital[2].write(0)
+            time.sleep(tempo1)
         case 2:
             tempo1 = float(input("Escolha o tempo de pulso (Em segundos): "))
             tempo2 = float(input("Escolha o tempo de pausa (Em segundos): "))
