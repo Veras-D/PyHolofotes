@@ -23,8 +23,8 @@ def arduino_conected(portas):
         pass
 
 
-def on_closing():
-    global arduino
-    if arduino is not None:
-        arduino.close()
-        print('fechado')
+def on_closing(event, arduino):
+    if event.widget == event.widget.winfo_toplevel():
+        if arduino is not None:
+            arduino.close()
+            print('fechado')

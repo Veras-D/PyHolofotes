@@ -33,21 +33,19 @@ def open_new_page():
     for widget in root.winfo_children():
         widget.pack_forget()
 
-    root.geometry("500x500")
+    root.geometry("492x442")
     root.resizable(True, True)
     main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}")
     main_label.pack()
     root.eval('tk::PlaceWindow . right')
+    root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
 
 button = ctk.CTkButton(root, text="Continuar", command=open_new_page)  # Usuario só pode continuar se lelecionar uma porta
 button.pack(pady=30)
 
-root.bind("<Destroy>", on_closing())
-
 porta = selected_port.get()
-if porta != "Selecione a porta":  # Colocar condição de botão continuar
-    arduino = Serial(porta, 115200, timeout=1)
+root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
 root.mainloop()
 
