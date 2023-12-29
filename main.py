@@ -68,7 +68,7 @@ def pulso_unico():
             port_error.title("Erro!")
             port_error.geometry("200x100")
             port_error.resizable(False, False)
-            error_label = ctk.CTkLabel(port_error, text="Você deve escolher um tempo para iniciar o programa!",
+            error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
                                        wraplength=200)
             error_label.pack()
 
@@ -92,9 +92,33 @@ def pulso_periodico():
     root.title("Pulso Periódico")
     pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500)
     pulse_label.pack(pady=10)
-    # Colocar Formulario
-    led_pulse = lambda port=None: led(selected_port.get(), 2, tempo1, tempo2, num_pulse)
-    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse, fg_color="purple", hover_color="#8B008B")
+    tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
+    tempo1_entry.pack()
+    tempo2_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pausa (s)", justify='center')
+    tempo2_entry.pack()
+    num_pulse_entry = ctk.CTkEntry(root, placeholder_text="Número de Pulsos", justify='center')
+    num_pulse_entry.pack()
+
+    def led_pulse():
+        if tempo1_entry.get().strip() != "" and tempo2_entry.get().strip() != "" and num_pulse_entry.get().strip() != "":
+            led(porta=selected_port.get(), opc=2, tempo1=float(tempo1_entry.get()),
+                tempo2=float(tempo2_entry.get()), num_pulse=int(num_pulse_entry.get()))
+            open_new_page()
+        else:
+            port_error = ctk.CTkToplevel(root)
+            port_error.title("Erro!")
+            port_error.geometry("200x100")
+            port_error.resizable(False, False)
+            error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
+                                       wraplength=200)
+            error_label.pack()
+
+            error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
+                                         fg_color="red", hover_color="#8B008B")
+            error_button.pack(pady=10)
+            port_error.mainloop()
+
+    start_bnt = ctk.CTkButton(root, text="Start Pulse", command=lambda port=None: led_pulse(), fg_color="purple", hover_color="#8B008B")
     start_bnt.pack(pady=10)
     # Colocar animação de working
     goHome = ctk.CTkButton(root, text="Go Home", command=open_new_page, fg_color="purple", hover_color="#8B008B")
