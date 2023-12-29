@@ -57,7 +57,8 @@ def pulso_unico():
     start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    # Voltar a tela de seleção de pulso
+    # Voltar a tela de seleção de pulso, botão pra voltar
+    # Mudar Titulos das janelas
 
 
 def pulso_periodico():
@@ -71,7 +72,8 @@ def pulso_periodico():
     start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    # Voltar a tela de seleção de pulso
+    # Voltar a tela de seleção de pulso, botão pra voltar
+    # Mudar Titulos das janelas
 
 
 portas = find_arduino()
