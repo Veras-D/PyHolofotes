@@ -19,6 +19,7 @@ def open_new_page():
             widget.pack_forget()
 
         root.geometry("500x500")
+        root.title("Seleção de pulso")
         root.minsize(500, 200)
         root.resizable(True, True)
         main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
@@ -50,6 +51,7 @@ def pulso_unico():
     for widget in root.winfo_children():
         widget.pack_forget()
 
+    root.title("Pulso Único")
     pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500)
     pulse_label.pack(pady=10)
     # Colocar Formulario
@@ -57,14 +59,15 @@ def pulso_unico():
     start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    # Voltar a tela de seleção de pulso, botão pra voltar
-    # Mudar Titulos das janelas
+    goHome = ctk.CTkButton(root, text="Go To Home", command=open_new_page)
+    goHome.pack(pady=25)
 
 
 def pulso_periodico():
     for widget in root.winfo_children():
         widget.pack_forget()
 
+    root.title("Pulso Periódico")
     pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500)
     pulse_label.pack(pady=10)
     # Colocar Formulario
@@ -72,8 +75,8 @@ def pulso_periodico():
     start_bnt = ctk.CTkButton(root, text="Start Pulse", command=led_pulse)
     start_bnt.pack(pady=10)
     # Colocar animação de working
-    # Voltar a tela de seleção de pulso, botão pra voltar
-    # Mudar Titulos das janelas
+    goHome = ctk.CTkButton(root, text="Go To Home", command=open_new_page)
+    goHome.pack(pady=25)
 
 
 portas = find_arduino()
@@ -100,3 +103,5 @@ root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get
 
 
 root.mainloop()
+
+# Procurar logo para icone
