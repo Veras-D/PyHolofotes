@@ -26,23 +26,37 @@ selected_port.set("Selecione a porta")
 dropdown = ctk.CTkOptionMenu(root, variable=selected_port, values=portas,
                              command=lambda port=None: arduino_conected(selected_port.get()))
 dropdown.set(portas[0])
-dropdown.pack()
+dropdown.pack(pady=5)
 
 
 def open_new_page():
-    for widget in root.winfo_children():
-        widget.pack_forget()
+    if selected_port.get() != portas[0]:
+        for widget in root.winfo_children():
+            widget.pack_forget()
 
-    root.geometry("492x442")
-    root.resizable(True, True)
-    main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}")
-    main_label.pack()
-    root.eval('tk::PlaceWindow . right')
-    root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
+        root.geometry("492x442")
+        root.resizable(True, True)
+        main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}")
+        main_label.pack()
+        root.eval('tk::PlaceWindow . right')
+        root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
+    else:
+        port_error = ctk.CTkToplevel(root)
+        port_error.title("Erro!")
+        port_error.geometry("200x100")
+        port_error.resizable(False, False)
+        error_label = ctk.CTkLabel(port_error, text="Você deve selecionar uma porta para iniciar o programa!",
+                                   wraplength=200)
+        error_label.pack()
+        error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
+                                     fg_color="red", hover_color="#821D1A")
+        error_button.pack(pady=10)
+        port_error.mainloop()
 
 
-button = ctk.CTkButton(root, text="Continuar", command=open_new_page)  # Usuario só pode continuar se lelecionar uma porta
-button.pack(pady=30)
+
+button = ctk.CTkButton(root, text="Continuar", command=open_new_page)  # Usuario só pode continuar se selecionar uma porta
+button.pack(pady=25)
 
 porta = selected_port.get()
 root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
