@@ -1,6 +1,6 @@
 # PyHolofotes
 
-PyHolofotes é um programa Python para controlar um sistema Arduino RELE, injetando pulsos em superfícies para análises térmicas com uma câmera termográfica. Ele foi implementado no Laboratório de Transferência de Calor da UEMA, proporcionando uma plataforma eficiente para coleta de dados térmicos.
+PyHolofotes é um programa Python para controlar um sistema Arduino RELE, injetando pulsos em superfícies para análises térmicas de defeitos não aparentes com uma câmera termográfica. Ele foi implementado no Laboratório de Transferência de Calor da UEMA, proporcionando uma plataforma eficiente e precisa para coleta de dados térmicos.
 
 ## Como Baixar e Executar
 
@@ -10,6 +10,7 @@ Para baixar o executável, clique no botão "Download" abaixo. Depois de baixar,
 
 ## Requisitos
 
+### Do Computador
 Antes de executar o programa, certifique-se de ter instalado os seguintes pacotes:
 
 - pyserial
@@ -22,6 +23,9 @@ Esses pacotes podem ser instalados usando pip:
 ```bash
 pip install requirements.txt
 ```
+
+### Do Arduino
+O arduino deve ser caregado com o script `arduino_code.ino` para que seja viavel a utilização do código, o carregamento pode ser feito por meio do software **Arduino IDE**.
 
 ## Licença
 
