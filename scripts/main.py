@@ -5,7 +5,7 @@ import customtkinter as ctk
 from scripts.led_pulse import led
 
 
-# Testando github actions 3
+# Testando github actions 4
 def Arduino(porta):
     if porta != "Selecione a porta":
         Arduino = serial.Serial(porta, 115200, timeout=1)
