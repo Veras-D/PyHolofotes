@@ -140,8 +140,8 @@ root.title("PyHolofotes")
 root.geometry("300x120")
 root.resizable(False, False)
 ctk.set_appearance_mode("dark")
-icon = get_base64_encoded_image("../img/icon.png")
-root.iconphoto(True, PhotoImage(data=icon))
+# icon = get_base64_encoded_image("../img/icon.png")
+# root.iconphoto(True, PhotoImage(data=icon))
 
 
 selected_port = StringVar()

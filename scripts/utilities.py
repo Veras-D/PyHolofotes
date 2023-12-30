@@ -2,7 +2,7 @@ from serial import *
 import serial.tools.list_ports
 from tkinter import *
 import webbrowser
-import base64
+# import base64
 
 
 arduino = None
@@ -12,9 +12,9 @@ def callback(url):
     webbrowser.open_new_tab(url)
 
 
-def get_base64_encoded_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
+# def get_base64_encoded_image(image_path):
+#     with open(image_path, "rb") as img_file:
+#         return base64.b64encode(img_file.read()).decode('utf-8')
 
 
 def find_arduino():

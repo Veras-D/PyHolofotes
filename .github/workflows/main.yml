@@ -38,7 +38,7 @@ jobs:
           pip install pyinstaller
 
       - name: Build with pyinstaller for ${{ matrix.config.os }}
-        run: pyinstaller scripts/main.py --onefile --noconsole
+        run: pyinstaller scripts/main.py --onefile --noconsole --icon=img/icon.ico
 
       - name: Rename builded app
         run: mv ./dist ./dist-${{ matrix.config.os }}
