@@ -33,7 +33,7 @@ Este projeto está licenciado sob a licença MIT. Para mais detalhes, consulte o
 
 ## Contribuições
 
-Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request.
+Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request (Certifique-se de rodar os testes antes de enviar um pull request).
 
 ## Print do Projeto
 
