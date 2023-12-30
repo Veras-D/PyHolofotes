@@ -14,7 +14,7 @@ def Arduino(porta):
 
 
 def open_new_page():
-    if selected_port.get() != portas[0]:
+    if selected_port.get() != ports[0]:
         for widget in root.winfo_children():
             widget.pack_forget()
 
@@ -134,7 +134,7 @@ def pulso_periodico():
     goHome.pack(pady=25)
 
 
-portas = find_arduino()
+ports = find_arduino()
 root = ctk.CTk()
 root.title("PyHolofotes")
 root.geometry("300x120")
@@ -147,10 +147,10 @@ root.iconphoto(True, PhotoImage(data=icon))
 selected_port = StringVar()
 selected_port.set("Selecione a porta")
 
-dropdown = ctk.CTkOptionMenu(root, variable=selected_port, values=portas,
+dropdown = ctk.CTkOptionMenu(root, variable=selected_port, values=ports,
                              command=lambda port=None: arduino_conected(selected_port.get()),
                              fg_color="purple", button_color="#8B008B", button_hover_color="#9370DB")
-dropdown.set(portas[0])
+dropdown.set(ports[0])
 dropdown.pack(pady=5)
 
 
