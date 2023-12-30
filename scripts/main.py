@@ -142,6 +142,7 @@ root.resizable(False, False)
 ctk.set_appearance_mode("dark")
 # icon = get_base64_encoded_image("../img/icon.png")
 # root.iconphoto(True, PhotoImage(data=icon))
+frame = ctk.CTkFrame(root, 270, 105). place(x=15, y=0)
 
 
 selected_port = StringVar()
