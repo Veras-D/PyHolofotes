@@ -37,6 +37,7 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
           pip install pillow  
+          pip install pywin32
 
       - name: Build with pyinstaller for ${{ matrix.config.os }}
         run: pyinstaller scripts/main.py --onefile --noconsole --icon=img/icon.ico
