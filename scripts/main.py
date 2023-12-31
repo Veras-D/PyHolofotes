@@ -13,6 +13,18 @@ def Arduino(porta):
         return None
 
 
+def changeTheme():
+    global color_bg
+    if ctk.get_appearance_mode() == "Dark":
+        ctk.set_appearance_mode("light")
+        color_bg = "#DBDBDB"
+        open_new_page()
+    else:
+        ctk.set_appearance_mode("Dark")
+        color_bg = "#2B2B2B"
+        open_new_page()
+
+
 def open_new_page():
     if selected_port.get() != ports[0]:
         root.geometry(f"500x500+{CENTER}+{CENTER}")
@@ -26,7 +38,7 @@ def open_new_page():
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
         tabview = ctk.CTkTabview(root, width=400, height=450, corner_radius=20, segmented_button_selected_color="purple",
-                                 segmented_button_selected_hover_color="#8B008B", bg_color="#2B2B2B")
+                                 segmented_button_selected_hover_color="#8B008B", bg_color=color_bg)
         tabview.pack()
         tabview.add("SetUp")
         tabview.add("Configures")
@@ -42,51 +54,53 @@ def open_new_page():
         pulso_unico_bnt.pack(pady=20)
         pulso_periodico_bnt.pack()
 
-        # Add botão para mudar tema
+        change_theme_bnt = ctk.CTkButton(configures_tab, text="Theme", command=changeTheme,
+                                         corner_radius=20, width=15)
+        change_theme_bnt.place(x=290, y=0)
         main_label1 = ctk.CTkLabel(configures_tab,
                                    text=f"Porta: {selected_port.get()}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label1.place(x=0, y=20)  # {Arduino(selected_port.get())}
 
         main_label2 = ctk.CTkLabel(configures_tab,
                                    text=f"Arduino: ",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label2.place(x=0, y=45)
 
         arduino_get = Arduino(selected_port.get())
         main_label3 = ctk.CTkLabel(configures_tab,
                                    text=f"Taxa de Transmissão: {arduino_get.baudrate}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label3.place(x=10, y=70)
 
         main_label4 = ctk.CTkLabel(configures_tab,
                                    text=f"Tempo de Espera Maximo: {arduino_get.timeout}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label4.place(x=10, y=95)
 
         main_label5 = ctk.CTkLabel(configures_tab,
                                    text=f"Bytesize: {arduino_get.bytesize}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label5.place(x=10, y=120)
 
         main_label6 = ctk.CTkLabel(configures_tab,
                                    text=f"Controle de Fluxo XON/XOFF: {arduino_get.xonxoff}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label6.place(x=10, y=145)
 
         main_label7 = ctk.CTkLabel(configures_tab,
                                    text=f"Controle de Fluxo RTS/CTS: {arduino_get.rts}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label7.place(x=10, y=170)
 
         main_label8 = ctk.CTkLabel(configures_tab,
                                    text=f"Controle de Fluxo DSR/DTR: {arduino_get.dsr}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label8.place(x=10, y=195)
 
         main_label9 = ctk.CTkLabel(configures_tab,
                                    text=f"ID: {hex(id(arduino_get))}",
-                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+                                   wraplength=400, bg_color=color_bg, compound="left")
         main_label9.place(x=10, y=220)
 
         about_label = ctk.CTkLabel(about_tab,
@@ -98,8 +112,8 @@ def open_new_page():
                                    wraplength=400)
         about_label.pack()
         instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2",
-                                      fg_color="#2B2B2B")
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2", fg_color="#2B2B2B")
+                                      fg_color=color_bg)
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2", fg_color=color_bg)
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
@@ -116,7 +130,7 @@ def open_new_page():
         port_error.resizable(False, False)
         frame(port_error)
         error_label = ctk.CTkLabel(port_error, text="Você deve selecionar uma porta para iniciar o programa!",
-                                   wraplength=200, fg_color="#2B2B2B")
+                                   wraplength=200, fg_color=color_bg)
         error_label.pack()
         error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
                                      fg_color="red", hover_color="#821D1A")
@@ -130,7 +144,7 @@ def pulso_unico():
 
     root.title("Pulso Único")
     frame(root)
-    pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500, fg_color="#2B2B2B")
+    pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500, fg_color=color_bg)
     pulse_label.pack(pady=10)
     tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
     tempo1_entry.pack()
@@ -146,7 +160,7 @@ def pulso_unico():
             port_error.resizable(False, False)
             frame(port_error)
             error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
-                                       wraplength=200, fg_color="#2B2B2B")
+                                       wraplength=200, fg_color=color_bg)
             error_label.pack()
 
             error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
@@ -168,7 +182,7 @@ def pulso_periodico():
 
     root.title("Pulso Periódico")
     frame(root)
-    pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500, fg_color="#2B2B2B")
+    pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500, fg_color=color_bg)
     pulse_label.pack(pady=10)
     tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
     tempo1_entry.pack(pady=5)
@@ -189,7 +203,7 @@ def pulso_periodico():
             port_error.resizable(False, False)
             frame(port_error)
             error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
-                                       wraplength=200, fg_color="#2B2B2B")
+                                       wraplength=200, fg_color=color_bg)
             error_label.pack()
 
             error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
@@ -204,6 +218,7 @@ def pulso_periodico():
     goHome.pack(pady=25)
 
 
+color_bg = "#2B2B2B"
 ports = find_arduino()
 root = ctk.CTk()
 root.title("PyHolofotes")
