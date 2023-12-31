@@ -14,16 +14,30 @@ def Arduino(porta):
 
 
 def changeTheme():
-    global color_bg, color_text
+    global color_bg, color_text, instagram_link, github_link, text_radius_color
     if ctk.get_appearance_mode() == "Dark":
         ctk.set_appearance_mode("light")
         color_bg = "#DBDBDB"
         color_text = "purple"
+        text_radius_color = "#EBEBEB"
+        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
+                                      fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", 
+                                   fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
+        instagram_link.place(x=20, y=root.winfo_height() - 80)
+        github_link.place(x=20, y=root.winfo_height() - 50)
         open_new_page()
     else:
         ctk.set_appearance_mode("Dark")
         color_bg = "#2B2B2B"
         color_text = "magenta"
+        text_radius_color = "#242424"
+        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
+                                      fg_color=text_radius_color, corner_radius=20)
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2",
+                                   fg_color=text_radius_color, corner_radius=20)
+        instagram_link.place(x=20, y=root.winfo_height() - 80)
+        github_link.place(x=20, y=root.winfo_height() - 50)
         open_new_page()
 
 
@@ -114,15 +128,15 @@ def open_new_page():
                                    wraplength=400)
         about_label.pack()
         instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
-                                      fg_color=color_bg, bg_color=color_bg, corner_radius=20)
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", fg_color=color_bg,
+                                      fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", fg_color=text_radius_color,
                                    bg_color=color_bg, corner_radius=20)
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
 
-        instagram_link.place(x=20, y=root.winfo_height()-70)
-        github_link.place(x=20, y=root.winfo_height()-45)
+        instagram_link.place(x=20, y=root.winfo_height()-80)
+        github_link.place(x=20, y=root.winfo_height()-50)
 
     else:
         port_error = ctk.CTkToplevel(root)
@@ -221,6 +235,7 @@ def pulso_periodico():
 
 color_bg = "#2B2B2B"
 color_text = "magenta"
+text_radius_color = "#242424"
 ports = find_arduino()
 root = ctk.CTk()
 root.title("PyHolofotes")
@@ -228,8 +243,6 @@ root.update()
 root.geometry(f"300x120+{CENTER}+{CENTER}")
 root.resizable(False, False)
 ctk.set_appearance_mode("dark")
-# icon = get_base64_encoded_image("../img/icon.png")
-# root.iconphoto(True, PhotoImage(data=icon))
 frame(root)
 
 
@@ -243,7 +256,7 @@ dropdown.set(ports[0])
 dropdown.pack(pady=5)
 
 
-button = ctk.CTkButton(root, text="Continuar", command=open_new_page, fg_color="purple", hover_color="#8B008B")
+button = ctk.CTkButton(root, text="Continue", command=open_new_page, fg_color="purple", hover_color="#8B008B")
 button.pack(pady=25)
 
 porta = selected_port.get()
