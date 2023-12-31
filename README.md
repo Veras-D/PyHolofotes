@@ -33,9 +33,12 @@ Este projeto está licenciado sob a **licença MIT**. Para mais detalhes, consul
 
 Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request (Certifique-se de **rodar os testes** antes de enviar um pull request).
 
-## Print do Projeto
+## Prints do Projeto
 
-![Print do Projeto](https://i.imgur.com/vNQ7PIp.png)
+| SetUp | Configure | About |
+| -------- | -------- | -------- |
+| ![SetUp](https://i.imgur.com/0AUpqNl.png) | ![Configure](https://i.imgur.com/U2sXa7W.png) | ![About](https://i.imgur.com/TPglUzN.png) |
+
 
 ## Código Fonte
 
