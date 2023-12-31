@@ -14,14 +14,16 @@ def Arduino(porta):
 
 
 def changeTheme():
-    global color_bg
+    global color_bg, color_text
     if ctk.get_appearance_mode() == "Dark":
         ctk.set_appearance_mode("light")
         color_bg = "#DBDBDB"
+        color_text = "purple"
         open_new_page()
     else:
         ctk.set_appearance_mode("Dark")
         color_bg = "#2B2B2B"
+        color_text = "magenta"
         open_new_page()
 
 
@@ -55,7 +57,7 @@ def open_new_page():
         pulso_periodico_bnt.pack()
 
         change_theme_bnt = ctk.CTkButton(configures_tab, text="Theme", command=changeTheme,
-                                         corner_radius=20, width=15)
+                                         corner_radius=20, width=15, fg_color="purple", hover_color="#8B008B")
         change_theme_bnt.place(x=290, y=0)
         main_label1 = ctk.CTkLabel(configures_tab,
                                    text=f"Porta: {selected_port.get()}",
@@ -111,17 +113,16 @@ def open_new_page():
                                         "precisa para coleta de dados térmicos.",
                                    wraplength=400)
         about_label.pack()
-        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2",
-                                      fg_color=color_bg)
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2", fg_color=color_bg)
+        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
+                                      fg_color=color_bg, bg_color=color_bg, corner_radius=20)
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", fg_color=color_bg,
+                                   bg_color=color_bg, corner_radius=20)
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
 
         instagram_link.place(x=20, y=root.winfo_height()-70)
         github_link.place(x=20, y=root.winfo_height()-45)
-        # github_link.pack(side=ctk.BOTTOM)
-        # instagram_link.pack(side=ctk.BOTTOM)
 
     else:
         port_error = ctk.CTkToplevel(root)
@@ -219,6 +220,7 @@ def pulso_periodico():
 
 
 color_bg = "#2B2B2B"
+color_text = "magenta"
 ports = find_arduino()
 root = ctk.CTk()
 root.title("PyHolofotes")
