@@ -15,14 +15,14 @@ def Arduino(porta):
 
 def open_new_page():
     if selected_port.get() != ports[0]:
+        root.geometry(f"500x500+{CENTER}+{CENTER}")
+        frame(root)
+        root.title("Seleção de pulso")
+        root.resizable(False, False)
+
         for widget in root.winfo_children():
             widget.pack_forget()
 
-        root.geometry("500x500")
-        frame(root)
-        root.title("Seleção de pulso")
-        root.minsize(500, 250)
-        root.resizable(True, True)
         main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
                                   wraplength=480, bg_color="#2B2B2B")
         main_label.pack()
@@ -145,7 +145,8 @@ def pulso_periodico():
 ports = find_arduino()
 root = ctk.CTk()
 root.title("PyHolofotes")
-root.geometry("300x120")
+root.update()
+root.geometry(f"300x120+{CENTER}+{CENTER}")
 root.resizable(False, False)
 ctk.set_appearance_mode("dark")
 # icon = get_base64_encoded_image("../img/icon.png")
