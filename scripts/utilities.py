@@ -1,11 +1,20 @@
 from serial import *
 import serial.tools.list_ports
-from tkinter import *
+import customtkinter as ctk
 import webbrowser
 # import base64
 
 
 arduino = None
+
+
+def frame(root):
+    root.update()
+    largura = root.winfo_width()
+    altura = root.winfo_height()
+    x = 15
+    y = 0
+    return ctk.CTkFrame(root, largura - 2 * x, altura - x).place(x=x, y=y)
 
 
 def callback(url):

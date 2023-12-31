@@ -19,11 +19,12 @@ def open_new_page():
             widget.pack_forget()
 
         root.geometry("500x500")
+        frame(root)
         root.title("Seleção de pulso")
         root.minsize(500, 250)
         root.resizable(True, True)
         main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
-                                  wraplength=500)
+                                  wraplength=500, bg_color="#2B2B2B")
         main_label.pack()
         root.eval('tk::PlaceWindow . right')
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
@@ -35,8 +36,8 @@ def open_new_page():
         pulso_unico_bnt.pack(pady=20)
         pulso_periodico_bnt.pack()
 
-        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2")
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2")
+        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2", fg_color="#2B2B2B")
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2", fg_color="#2B2B2B")
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
@@ -47,10 +48,11 @@ def open_new_page():
     else:
         port_error = ctk.CTkToplevel(root)
         port_error.title("Erro!")
-        port_error.geometry("200x100")
+        port_error.geometry("230x100")
         port_error.resizable(False, False)
+        frame(port_error)
         error_label = ctk.CTkLabel(port_error, text="Você deve selecionar uma porta para iniciar o programa!",
-                                   wraplength=200)
+                                   wraplength=200, fg_color="#2B2B2B")
         error_label.pack()
         error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
                                      fg_color="red", hover_color="#821D1A")
@@ -63,7 +65,8 @@ def pulso_unico():
         widget.pack_forget()
 
     root.title("Pulso Único")
-    pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500)
+    frame(root)
+    pulse_label = ctk.CTkLabel(root, text="Pulso Único", wraplength=500, fg_color="#2B2B2B")
     pulse_label.pack(pady=10)
     tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
     tempo1_entry.pack()
@@ -75,10 +78,11 @@ def pulso_unico():
         else:
             port_error = ctk.CTkToplevel(root)
             port_error.title("Erro!")
-            port_error.geometry("200x100")
+            port_error.geometry("230x100")
             port_error.resizable(False, False)
+            frame(port_error)
             error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
-                                       wraplength=200)
+                                       wraplength=200, fg_color="#2B2B2B")
             error_label.pack()
 
             error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
@@ -99,7 +103,8 @@ def pulso_periodico():
         widget.pack_forget()
 
     root.title("Pulso Periódico")
-    pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500)
+    frame(root)
+    pulse_label = ctk.CTkLabel(root, text="Pulso Periódico", wraplength=500, fg_color="#2B2B2B")
     pulse_label.pack(pady=10)
     tempo1_entry = ctk.CTkEntry(root, placeholder_text="Tempo de Pulso (s)", justify='center')
     tempo1_entry.pack(pady=5)
@@ -116,10 +121,11 @@ def pulso_periodico():
         else:
             port_error = ctk.CTkToplevel(root)
             port_error.title("Erro!")
-            port_error.geometry("200x100")
+            port_error.geometry("230x100")
             port_error.resizable(False, False)
+            frame(port_error)
             error_label = ctk.CTkLabel(port_error, text="Preencha os valores adequadamente!",
-                                       wraplength=200)
+                                       wraplength=200, fg_color="#2B2B2B")
             error_label.pack()
 
             error_button = ctk.CTkButton(port_error, text="OK", command=port_error.destroy,
@@ -142,7 +148,7 @@ root.resizable(False, False)
 ctk.set_appearance_mode("dark")
 # icon = get_base64_encoded_image("../img/icon.png")
 # root.iconphoto(True, PhotoImage(data=icon))
-frame = ctk.CTkFrame(root, 270, 105). place(x=15, y=0)
+frame(root)
 
 
 selected_port = StringVar()
