@@ -1,15 +1,15 @@
 # PyHolofotes
 
-PyHolofotes é um programa Python para controlar um sistema Arduino RELE, injetando pulsos em superfícies para análises térmicas de defeitos não aparentes com uma câmera termográfica. Ele foi implementado no Laboratório de Transferência de Calor da UEMA, proporcionando uma plataforma eficiente e precisa para coleta de dados térmicos.
+PyHolofotes é um programa **Python** para controlar um sistema **Arduino RELE**, injetando pulsos em superfícies para análises térmicas de defeitos não aparentes com uma câmera termográfica. Ele foi implementado no Laboratório de Transferência de Calor da UEMA, proporcionando uma plataforma eficiente e precisa para coleta de dados térmicos.
 
 ## Como Baixar e Executar
 
-Para baixar o executável, Cheque Releases e procure a versão mais recente do arquivo `.zip` compativel com seu sistema operacional. Depois de baixar, extraia o arquivo e execute o programa.
+Para baixar o executável, Cheque `Releases` e procure a versão mais recente do arquivo `.zip` compativel com **seu sistema operacional**. Depois de baixar, **extraia o arquivo** e execute o programa.
 
 ## Requisitos
 
 ### Do Computador
-Antes de executar o programa, certifique-se de ter instalado os seguintes pacotes:
+Antes de executar o programa, **certifique-se** de ter instalado os seguintes pacotes:
 
 - pyserial
 - CustomTkinter
@@ -27,11 +27,11 @@ O arduino deve ser caregado com o script `arduino_code.ino` para que seja viavel
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT. Para mais detalhes, consulte o arquivo LICENSE.
+Este projeto está licenciado sob a **licença MIT**. Para mais detalhes, consulte o arquivo `LICENSE`.
 
 ## Contribuições
 
-Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request (Certifique-se de rodar os testes antes de enviar um pull request).
+Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request (Certifique-se de **rodar os testes** antes de enviar um pull request).
 
 ## Print do Projeto
 
