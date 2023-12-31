@@ -23,20 +23,82 @@ def open_new_page():
         for widget in root.winfo_children():
             widget.pack_forget()
 
-        main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
-                                  wraplength=480, bg_color="#2B2B2B")
-        main_label.pack()
-        root.eval('tk::PlaceWindow . right')
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
-        pulso_unico_bnt = ctk.CTkButton(root, text="PULSO ÚNICO", command=pulso_unico,
+        tabview = ctk.CTkTabview(root, width=400, height=450, corner_radius=20, segmented_button_selected_color="purple",
+                                 segmented_button_selected_hover_color="#8B008B", bg_color="#2B2B2B")
+        tabview.pack()
+        tabview.add("SetUp")
+        tabview.add("Configures")
+        tabview.add("About")
+        setup_tab = tabview.tab("SetUp")
+        configures_tab = tabview.tab("Configures")
+        about_tab = tabview.tab("About")
+
+        pulso_unico_bnt = ctk.CTkButton(setup_tab, text="PULSO ÚNICO", command=pulso_unico,
                                         fg_color="purple", hover_color="#8B008B")
-        pulso_periodico_bnt = ctk.CTkButton(root, text="PULSO PERIÓDICO", command=pulso_periodico,
+        pulso_periodico_bnt = ctk.CTkButton(setup_tab, text="PULSO PERIÓDICO", command=pulso_periodico,
                                             fg_color="purple", hover_color="#8B008B")
         pulso_unico_bnt.pack(pady=20)
         pulso_periodico_bnt.pack()
 
-        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2", fg_color="#2B2B2B")
+        # Add botão para mudar tema
+        main_label1 = ctk.CTkLabel(configures_tab,
+                                   text=f"Porta: {selected_port.get()}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label1.place(x=0, y=20)  # {Arduino(selected_port.get())}
+
+        main_label2 = ctk.CTkLabel(configures_tab,
+                                   text=f"Arduino: ",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label2.place(x=0, y=45)
+
+        arduino_get = Arduino(selected_port.get())
+        main_label3 = ctk.CTkLabel(configures_tab,
+                                   text=f"Taxa de Transmissão: {arduino_get.baudrate}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label3.place(x=10, y=70)
+
+        main_label4 = ctk.CTkLabel(configures_tab,
+                                   text=f"Tempo de Espera Maximo: {arduino_get.timeout}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label4.place(x=10, y=95)
+
+        main_label5 = ctk.CTkLabel(configures_tab,
+                                   text=f"Bytesize: {arduino_get.bytesize}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label5.place(x=10, y=120)
+
+        main_label6 = ctk.CTkLabel(configures_tab,
+                                   text=f"Controle de Fluxo XON/XOFF: {arduino_get.xonxoff}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label6.place(x=10, y=145)
+
+        main_label7 = ctk.CTkLabel(configures_tab,
+                                   text=f"Controle de Fluxo RTS/CTS: {arduino_get.rts}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label7.place(x=10, y=170)
+
+        main_label8 = ctk.CTkLabel(configures_tab,
+                                   text=f"Controle de Fluxo DSR/DTR: {arduino_get.dsr}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label8.place(x=10, y=195)
+
+        main_label9 = ctk.CTkLabel(configures_tab,
+                                   text=f"ID: {hex(id(arduino_get))}",
+                                   wraplength=400, bg_color="#2B2B2B", compound="left")
+        main_label9.place(x=10, y=220)
+
+        about_label = ctk.CTkLabel(about_tab,
+                                   text="PyHolofotes é um programa Python para controlar um sistema Arduino RELE, "
+                                        "injetando pulsos em superfícies para análises térmicas de defeitos não "
+                                        "aparentes com uma câmera termográfica. Ele foi implementado no Laboratório de "
+                                        "Transferência de Calor da UEMA, proporcionando uma plataforma eficiente e "
+                                        "precisa para coleta de dados térmicos.",
+                                   wraplength=400)
+        about_label.pack()
+        instagram_link = ctk.CTkLabel(root, text="Instagram", text_color="magenta", cursor="hand2",
+                                      fg_color="#2B2B2B")
         github_link = ctk.CTkLabel(root, text="GitHub", text_color="magenta", cursor="hand2", fg_color="#2B2B2B")
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
