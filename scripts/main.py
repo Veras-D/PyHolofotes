@@ -24,7 +24,7 @@ def open_new_page():
         root.minsize(500, 250)
         root.resizable(True, True)
         main_label = ctk.CTkLabel(root, text=f"Porta: {selected_port.get()}\nArduino: {Arduino(selected_port.get())}",
-                                  wraplength=500, bg_color="#2B2B2B")
+                                  wraplength=480, bg_color="#2B2B2B")
         main_label.pack()
         root.eval('tk::PlaceWindow . right')
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
@@ -42,8 +42,10 @@ def open_new_page():
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
 
-        github_link.pack(side=ctk.BOTTOM)
-        instagram_link.pack(side=ctk.BOTTOM)
+        instagram_link.place(x=20, y=root.winfo_height()-70)
+        github_link.place(x=20, y=root.winfo_height()-45)
+        # github_link.pack(side=ctk.BOTTOM)
+        # instagram_link.pack(side=ctk.BOTTOM)
 
     else:
         port_error = ctk.CTkToplevel(root)
