@@ -1,8 +1,6 @@
-from serial import *
 import serial.tools.list_ports
 import customtkinter as ctk
 import webbrowser
-# import base64
 
 
 arduino = None
@@ -21,11 +19,6 @@ def callback(url):
     webbrowser.open_new_tab(url)
 
 
-# def get_base64_encoded_image(image_path):
-#     with open(image_path, "rb") as img_file:
-#         return base64.b64encode(img_file.read()).decode('utf-8')
-
-
 def find_arduino():
     arduino_ports = serial.tools.list_ports.comports()
     ports = ["Selecione a porta"]
@@ -40,7 +33,7 @@ def arduino_conected(portas):
         arduino = serial.Serial(portas, 115200, timeout=1)
         print("Arduino está conectado.")
     except serial.SerialException:
-        print("Não foi possível conectar ao Arduino. Verifique a conexão e tente novamente.")  # Fazer esses textos aparecerem no programa
+        print("Não foi possível conectar ao Arduino. Verifique a conexão e tente novamente.")
         pass
 
 

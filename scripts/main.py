@@ -24,7 +24,7 @@ def changeTheme():
                                       fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
         github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", 
                                    fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
-        instagram_link.place(x=20, y=root.winfo_height() - 80)
+        instagram_link.place(x=20, y=root.winfo_height() - 84)
         github_link.place(x=20, y=root.winfo_height() - 50)
         open_new_page()
     else:
@@ -36,7 +36,7 @@ def changeTheme():
                                       fg_color=text_radius_color, corner_radius=20)
         github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2",
                                    fg_color=text_radius_color, corner_radius=20)
-        instagram_link.place(x=20, y=root.winfo_height() - 80)
+        instagram_link.place(x=20, y=root.winfo_height() - 84)
         github_link.place(x=20, y=root.winfo_height() - 50)
         open_new_page()
 
@@ -119,6 +119,10 @@ def open_new_page():
                                    wraplength=400, bg_color=color_bg, compound="left")
         main_label9.place(x=10, y=220)
 
+        main_label10 = ctk.CTkLabel(configures_tab, text=f"Aberto: {Arduino(selected_port.get()).is_open}",
+                                    wraplength=400, bg_color=color_bg, compound="left")
+        main_label10.place(x=10, y=245)
+
         about_label = ctk.CTkLabel(about_tab,
                                    text="PyHolofotes é um programa Python para controlar um sistema Arduino RELE, "
                                         "injetando pulsos em superfícies para análises térmicas de defeitos não "
@@ -135,7 +139,7 @@ def open_new_page():
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
 
-        instagram_link.place(x=20, y=root.winfo_height()-80)
+        instagram_link.place(x=20, y=root.winfo_height()-84)
         github_link.place(x=20, y=root.winfo_height()-50)
 
     else:
@@ -167,6 +171,7 @@ def pulso_unico():
     def led_pulse():
         if tempo1_entry.get().strip() != "":
             led(porta=selected_port.get(), opc=1, tempo1=float(tempo1_entry.get()))
+            tempo1_entry.delete(0, END)
             open_new_page()
         else:
             port_error = ctk.CTkToplevel(root)
@@ -210,6 +215,9 @@ def pulso_periodico():
         if tempo1_entry.get().strip() != "" and tempo2_entry.get().strip() != "" and num_pulse_entry.get().strip() != "":
             led(porta=selected_port.get(), opc=2, tempo1=float(tempo1_entry.get()),
                 tempo2=float(tempo2_entry.get()), num_pulse=int(num_pulse_entry.get()))
+            tempo1_entry.delete(0, END)
+            tempo2_entry.delete(0, END)
+            num_pulse_entry.delete(0, END)
             open_new_page()
         else:
             port_error = ctk.CTkToplevel(root)
