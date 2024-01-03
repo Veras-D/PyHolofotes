@@ -37,7 +37,8 @@ Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma suges
 
 | SetUp | Configure | About |
 | -------- | -------- | -------- |
-| ![SetUp](https://i.imgur.com/0AUpqNl.png) | ![Configure](https://i.imgur.com/U2sXa7W.png) | ![About](https://i.imgur.com/TPglUzN.png) |
+| ![SetUp](https://i.imgur.com/YKO19bX.png) | ![Configure](https://i.imgur.com/DqAc6Ir.png) | ![About](https://i.imgur.com/oMBqqiV.png) |
+| ![SetUp](https://i.imgur.com/weQR1al.png) | ![Configure](https://i.imgur.com/AWbjtwn.png) | ![About](https://i.imgur.com/EB8vFol.png) |
 
 
 ## Código Fonte
