@@ -3,6 +3,7 @@ from utilities import *
 from tkinter import *
 import customtkinter as ctk
 from led_pulse import led
+from pyfirmata import Arduino as Arduino_
 
 
 def Arduino(porta):
@@ -11,6 +12,13 @@ def Arduino(porta):
         return Arduino
     else:
         return None
+
+
+def first_open():
+    global uno
+    if selected_port.get() != ports[0]:
+        uno = Arduino_(selected_port.get())
+    open_new_page()
 
 
 def changeTheme():
@@ -22,7 +30,7 @@ def changeTheme():
         text_radius_color = "#EBEBEB"
         instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
                                       fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", 
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2",
                                    fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
         instagram_link.place(x=20, y=root.winfo_height() - 84)
         github_link.place(x=20, y=root.winfo_height() - 50)
@@ -42,7 +50,8 @@ def changeTheme():
 
 
 def open_new_page():
-    if selected_port.get() != ports[0]:
+    if selected_port.get() != ports[0] and Arduino(selected_port.get()).is_open is True:
+        Arduino(selected_port.get()).close()
         root.geometry(f"500x500+{CENTER}+{CENTER}")
         frame(root)
         root.title("Seleção de pulso")
@@ -53,7 +62,8 @@ def open_new_page():
 
         root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
 
-        tabview = ctk.CTkTabview(root, width=400, height=450, corner_radius=20, segmented_button_selected_color="purple",
+        tabview = ctk.CTkTabview(root, width=400, height=450, corner_radius=20,
+                                 segmented_button_selected_color="purple",
                                  segmented_button_selected_hover_color="#8B008B", bg_color=color_bg)
         tabview.pack()
         tabview.add("SetUp")
@@ -76,7 +86,7 @@ def open_new_page():
         main_label1 = ctk.CTkLabel(configures_tab,
                                    text=f"Porta: {selected_port.get()}",
                                    wraplength=400, bg_color=color_bg, compound="left")
-        main_label1.place(x=0, y=20)  # {Arduino(selected_port.get())}
+        main_label1.place(x=0, y=20)
 
         main_label2 = ctk.CTkLabel(configures_tab,
                                    text=f"Arduino: ",
@@ -133,14 +143,15 @@ def open_new_page():
         about_label.pack()
         instagram_link = ctk.CTkLabel(root, text="Instagram", text_color=color_text, cursor="hand2",
                                       fg_color=text_radius_color, bg_color=color_bg, corner_radius=20)
-        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2", fg_color=text_radius_color,
+        github_link = ctk.CTkLabel(root, text="GitHub", text_color=color_text, cursor="hand2",
+                                   fg_color=text_radius_color,
                                    bg_color=color_bg, corner_radius=20)
 
         instagram_link.bind("<Button-1>", lambda e: callback("https://www.instagram.com/veras_programmer"))
         github_link.bind("<Button-1>", lambda e: callback("https://www.github.com/Veras-D"))
 
-        instagram_link.place(x=20, y=root.winfo_height()-84)
-        github_link.place(x=20, y=root.winfo_height()-50)
+        instagram_link.place(x=20, y=root.winfo_height() - 84)
+        github_link.place(x=20, y=root.winfo_height() - 50)
 
     else:
         port_error = ctk.CTkToplevel(root)
@@ -170,7 +181,7 @@ def pulso_unico():
 
     def led_pulse():
         if tempo1_entry.get().strip() != "":
-            led(porta=selected_port.get(), opc=1, tempo1=float(tempo1_entry.get()))
+            led(uno=uno, opc=1, tempo1=float(tempo1_entry.get()))
             tempo1_entry.delete(0, END)
             open_new_page()
         else:
@@ -213,7 +224,7 @@ def pulso_periodico():
 
     def led_pulse():
         if tempo1_entry.get().strip() != "" and tempo2_entry.get().strip() != "" and num_pulse_entry.get().strip() != "":
-            led(porta=selected_port.get(), opc=2, tempo1=float(tempo1_entry.get()),
+            led(uno=uno, opc=2, tempo1=float(tempo1_entry.get()),
                 tempo2=float(tempo2_entry.get()), num_pulse=int(num_pulse_entry.get()))
             tempo1_entry.delete(0, END)
             tempo2_entry.delete(0, END)
@@ -253,7 +264,6 @@ root.resizable(False, False)
 ctk.set_appearance_mode("dark")
 frame(root)
 
-
 selected_port = StringVar()
 selected_port.set("Selecione a porta")
 
@@ -263,12 +273,10 @@ dropdown = ctk.CTkOptionMenu(root, variable=selected_port, values=ports,
 dropdown.set(ports[0])
 dropdown.pack(pady=5)
 
-
-button = ctk.CTkButton(root, text="Continue", command=open_new_page, fg_color="purple", hover_color="#8B008B")
+button = ctk.CTkButton(root, text="Continue", command=first_open, fg_color="purple", hover_color="#8B008B")
 button.pack(pady=25)
 
 porta = selected_port.get()
 root.bind("<Destroy>", lambda event: on_closing(event, Arduino(selected_port.get())))
-
 
 root.mainloop()

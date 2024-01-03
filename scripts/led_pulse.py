@@ -1,9 +1,9 @@
 from pyfirmata import Arduino
 import time
+import customtkinter as ctk
 
 
-def led(porta: str, opc: int, tempo1: float, tempo2: float = None, num_pulse: int = None):
-    uno = Arduino(porta)
+def led(uno, opc: int, tempo1: float, tempo2: float = None, num_pulse: int = None):
     match opc:
         case 1:
             print('Pulso Unico')
