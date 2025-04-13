@@ -1,39 +1,39 @@
 # PyHolofotes
 
-PyHolofotes é um programa **Python** para controlar um sistema **Arduino RELE**, injetando pulsos em superfícies para análises térmicas de defeitos não aparentes com uma câmera termográfica. Ele foi implementado no Laboratório de Transferência de Calor da UEMA, proporcionando uma plataforma eficiente e precisa para coleta de dados térmicos.
+A Python program to control an Arduino RELE system, injecting pulses into surfaces for thermal analysis with a thermal imaging camera. Implemented at the UEMA Heat Transfer Laboratory, providing an efficient platform for thermal data collection.
 
-## Como Baixar e Executar
 
-Para baixar o executável, Cheque `Releases` e procure a versão mais recente do arquivo `.zip` compativel com **seu sistema operacional**. Depois de baixar, **extraia o arquivo** e execute o programa.
+## How to Download and Run
 
-## Requisitos
+To download the executable, check `Releases` and look for the latest version of the `.zip` file compatible with **your operating system**. After downloading, **extract the file** and run the program.
 
-### Do Computador
-Antes de executar o programa, **certifique-se** de ter instalado os seguintes pacotes:
+## Requirements
 
+### From the Computer
+Before running the program, **make sure** you have installed the following packages:
 - pyserial
 - CustomTkinter
 - packaging
 - pyFirmata
 
-Esses pacotes podem ser instalados usando pip:
+These packages can be installed using pip:
 
 ```bash
 pip install requirements.txt
 ```
 
-### Do Arduino
-O arduino deve ser caregado com o script `arduino_code.ino` para que seja viavel a utilização do código, o carregamento pode ser feito por meio do software **Arduino IDE**.
+### From Arduino
+The Arduino must be loaded with the `arduino_code.ino` script for the code to be usable. Loading can be done using the **Arduino IDE** software.
 
-## Licença
+## Licence
 
-Este projeto está licenciado sob a **licença MIT**. Para mais detalhes, consulte o arquivo `LICENSE`.
+This project is licensed under the **MIT license**. For more details, see the `LICENSE` file.
 
-## Contribuições
+## Contributions
 
-Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma sugestão de melhoria, por favor, crie uma issue ou envie um pull request (Certifique-se de **rodar os testes** antes de enviar um pull request).
+Contributions are welcome! If you find a bug or have a suggestion for improvement, please create an issue or submit a pull request (make sure to **run the tests** before submitting a pull request).
 
-## Prints do Projeto
+## Project Screenshots
 
 | SetUp | Configure | About |
 | -------- | -------- | -------- |
@@ -41,9 +41,9 @@ Contribuições são bem-vindas! Se você encontrar algum bug ou tiver uma suges
 | ![SetUp](https://i.imgur.com/weQR1al.png) | ![Configure](https://i.imgur.com/AWbjtwn.png) | ![About](https://i.imgur.com/EB8vFol.png) |
 
 
-## Código Fonte
+## Source Code
 
-O código fonte deste projeto está disponível no GitHub. Para clonar o repositório, use o seguinte comando:
+The source code for this project is available on GitHub. To clone the repository, use the following command:
 
 ```bash
 git clone git@github.com:Veras-D/PyHolofotes.git
